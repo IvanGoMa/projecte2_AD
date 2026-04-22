@@ -2,10 +2,12 @@ package ivha.jpa.project2.Model;
 
 import java.sql.Timestamp;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity 
 public class Product {
@@ -25,8 +27,22 @@ public class Product {
     private boolean active; 
     private Timestamp dateCreated;
     private Timestamp dateUpdated;
+
+    @OneToMany(mappedBy = "product")
+    private OrderItem orderItem;
+
     
     
+    public OrderItem getOrderItem() {
+        return orderItem;
+    }
+
+
+    public void setOrderItem(OrderItem orderItem) {
+        this.orderItem = orderItem;
+    }
+
+
     public Product() {
     }
 
