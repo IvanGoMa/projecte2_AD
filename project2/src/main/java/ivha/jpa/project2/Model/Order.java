@@ -2,7 +2,7 @@ package ivha.jpa.project2.Model;
 
 import java.sql.Timestamp;
 
-import jakarta.annotation.Generated;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

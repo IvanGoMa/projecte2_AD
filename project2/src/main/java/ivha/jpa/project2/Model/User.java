@@ -1,6 +1,6 @@
 package ivha.jpa.project2.Model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class User {
 
     @Id
     @GeneratedValue 
-    private Long id;
+    private int id;
     @Column(nullable=false, length=100)
     private String email;
     @Column(length=20)
@@ -45,10 +45,10 @@ public class User {
     }
 
     // getters i setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getEmail() {
@@ -82,6 +82,28 @@ public class User {
         this.dateUpdated = dateUpdated;
     }
     
+    public List<Role> getRols() {
+        return rols;
+    }
+
+    public void setRols(List<Role> rols) {
+        this.rols = rols;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        if (customer != null){
+            customer.setUser(this);
+        }
+        
+    }
+
+
+
     // ManyToMany - rol de usuari, en el costat del propietari
     @ManyToMany
     @JoinTable(
