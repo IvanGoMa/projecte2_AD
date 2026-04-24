@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import ivha.jpa.project2.Model.Address;
 
 @Repository
-public interface AddressRepository extends JpaRepository <Address, Long> {
+public interface AddressRepository extends JpaRepository <Address, Integer> {
 
-    public void deleteAllByCustomerId(Long id);
+    public void deleteAllByCustomerId(Integer id);
 
 }

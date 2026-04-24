@@ -25,7 +25,7 @@ public class CustomerService {
         this.mapper = mapper;
     }
 
-    public boolean deleteAdresses(Long id) {
+    public boolean deleteAdresses(int id) {
 
         Optional<Customer> customer = customerRepo.findById(id);
         if (customer.isPresent()){

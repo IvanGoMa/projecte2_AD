@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ivha.jpa.project2.DTO.ErrorDTO;
@@ -14,6 +15,7 @@ import ivha.jpa.project2.DTO.UserResponseDTO;
 import ivha.jpa.project2.Service.UserService;
 
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService service;

@@ -115,13 +115,8 @@ public class Order {
     }
 
 
-    public OrderItem getOrderItem() {
-        return orderItem;
-    }
-
-
-    public void setOrderItem(OrderItem orderItem) {
-        this.orderItem = orderItem;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
 }
