@@ -1,6 +1,8 @@
 package ivha.jpa.project2.Model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.CascadeType;
@@ -36,7 +38,7 @@ public class Order {
     private Invoice invoice;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private Order order;
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     
 
@@ -107,16 +109,19 @@ public class Order {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+        if (invoice != null){
+            invoice.setOrder(this);
+        }
     }
 
 
-    public Order getOrder() {
-        return order;
+    public OrderItem getOrderItem() {
+        return orderItem;
     }
 
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderItem(OrderItem orderItem) {
+        this.orderItem = orderItem;
     }
 
 }
