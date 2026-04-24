@@ -35,7 +35,8 @@ public class UserMapper {
                 user.getCustomer().getId(),
                 user.getCustomer().getFirstName(),
                 user.getCustomer().getLastName(),
-                user.getCustomer().getPhone()
+                user.getCustomer().getPhone(),
+                user.getCustomer().getAdresses()
             );
             userResponse.setCustomer(customer);
         }
