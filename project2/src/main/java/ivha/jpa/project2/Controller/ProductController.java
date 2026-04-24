@@ -33,6 +33,7 @@ public class ProductController {
     ProductService service;
 
 
+    // -------------- PART 1 ------------------------
     // Punt 2 - Càrrega massiva de dades d’un fitxer en format .csv
     @PostMapping("products/batch")
     public ResponseEntity<?> importProducts(@RequestBody MultipartFile csv) {
