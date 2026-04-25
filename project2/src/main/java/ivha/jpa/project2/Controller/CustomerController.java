@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ivha.jpa.project2.DTO.CustomerResponseDTO;
@@ -13,6 +14,7 @@ import ivha.jpa.project2.DTO.ErrorDTO;
 import ivha.jpa.project2.Service.CustomerService;
 
 @RestController
+@RequestMapping("/api")
 public class CustomerController {
 
     private final CustomerService service;
@@ -21,8 +23,9 @@ public class CustomerController {
         this.service = service;
     }
 
+    // Esborrar totes les adreces d'un customer
     @DeleteMapping("/addresses/{id}")
-    public ResponseEntity<?> deleteAdresses(Long id){
+    public ResponseEntity<?> deleteAdresses(int id){
         try {
             if(service.deleteAdresses(id)){
                 return ResponseEntity.ok("S'han esborrat les adresses del customer amb id " + id);
@@ -34,6 +37,7 @@ public class CustomerController {
         }
     }
 
+    // Retorna tots els customers
     @GetMapping("/customers")
     public ResponseEntity<?> getCustomers(){
         try{

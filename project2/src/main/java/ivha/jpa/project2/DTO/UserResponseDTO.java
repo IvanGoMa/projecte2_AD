@@ -6,6 +6,7 @@ public class UserResponseDTO {
     private String email;
     private CustomerResponseDTO customer;
     
+    // User sense customer per evitar recursivitat
     public UserResponseDTO(String email, int id){
         this.email = email;
         this.id = id;

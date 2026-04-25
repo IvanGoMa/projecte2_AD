@@ -1,6 +1,8 @@
 package ivha.jpa.project2.Model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import jakarta.persistence.CascadeType;
@@ -22,7 +24,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @ManyToOne
+    @ManyToOne(fetch =  FetchType.EAGER)
     @JoinColumn(name = "customerId")
     private Customer customer;
     private Timestamp orderDate;
@@ -36,7 +38,7 @@ public class Order {
     private Invoice invoice;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private Order order;
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     
 
@@ -51,6 +53,7 @@ public class Order {
         this.dataUpdated = dataUpdated;
     }
 
+    public Order(){}
     
     public int getId() {
         return id;
@@ -107,16 +110,28 @@ public class Order {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+        // Afegim order a invoice, ja que invoice es el costat propietari de la fk
+        if (invoice != null){
+            invoice.setOrder(this);
+        }
     }
 
 
-    public Order getOrder() {
-        return order;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+        if (orderItems != null){
+            for (OrderItem orderItem: orderItems){
+                // Afegim order a orderItem, ja que orderItem es el costat propietari de la fk
+                orderItem.setOrder(this);
+            }
+        }
     }
+
+    
 
 }

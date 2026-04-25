@@ -34,6 +34,8 @@ public class OrderItem {
         this.unitPrice = unitPrice;
     }
 
+    public OrderItem(){}
+
     public int getId() {
         return id;
     }
