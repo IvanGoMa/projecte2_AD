@@ -23,14 +23,19 @@ public class OrderMapper {
     }
 
     public OrderResponseDTO toOrderResponseDTO (Order order){
-        OrderResponseDTO response = new OrderResponseDTO(order.getCustomer().getId(), order.getOrderDate(), order.getTotalAmount(), order.getOrderStatus());
+        // Creem el DTO
+        OrderResponseDTO response = new OrderResponseDTO(order.getId(), order.getCustomer().getId(), order.getOrderDate(), order.getTotalAmount(), order.getOrderStatus());
         if (order.getOrderItems() != null){
+            
             List<OrderItem> orderItems = order.getOrderItems();
             List<OrderItemResponseDTO> orderItemsResponse = new ArrayList<>();
+
+            // Transformem els OrderItem al seu DTO
             for (OrderItem o : orderItems){
                 OrderItemResponseDTO orderItemResponse = new OrderItemResponseDTO(o.getQuantity(), o.getUnitPrice());
-                if (o.getProduct() != null){
 
+                if (o.getProduct() != null){
+                    // Transformem els productes d'orderItem al seu DTO
                     productResponseDTO product = new productResponseDTO(
                         o.getProduct().getNom(),
                         o.getProduct().getDescripcio(),

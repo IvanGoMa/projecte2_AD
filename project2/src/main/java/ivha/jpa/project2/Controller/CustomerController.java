@@ -23,6 +23,7 @@ public class CustomerController {
         this.service = service;
     }
 
+    // Esborrar totes les adreces d'un customer
     @DeleteMapping("/addresses/{id}")
     public ResponseEntity<?> deleteAdresses(int id){
         try {
@@ -36,6 +37,7 @@ public class CustomerController {
         }
     }
 
+    // Retorna tots els customers
     @GetMapping("/customers")
     public ResponseEntity<?> getCustomers(){
         try{

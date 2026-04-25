@@ -11,8 +11,9 @@ public class CustomerMapper {
 
     public CustomerResponseDTO toCustomerResponseDTO(Customer c){
         CustomerResponseDTO customer = new CustomerResponseDTO(c.getId(), c.getFirstName(), c.getLastName(), c.getPhone(), c.getAdresses());
-        if (customer.getUser() != null){
-            UserResponseDTO user = new UserResponseDTO(customer.getUser().getEmail(), customer.getUser().getId());
+        // Afegim el DTO de User
+        if (c.getUser() != null){
+            UserResponseDTO user = new UserResponseDTO(c.getUser().getEmail(), c.getUser().getId());
             customer.setUser(user);
         }
         return customer;

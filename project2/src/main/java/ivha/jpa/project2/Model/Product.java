@@ -1,7 +1,7 @@
 package ivha.jpa.project2.Model;
 
 import java.sql.Timestamp;
-
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,17 +29,17 @@ public class Product {
     private Timestamp dateUpdated;
 
     @OneToMany(mappedBy = "product")
-    private OrderItem orderItem;
+    private List<OrderItem> orderItems;
 
     
     
-    public OrderItem getOrderItem() {
-        return orderItem;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
 
-    public void setOrderItem(OrderItem orderItem) {
-        this.orderItem = orderItem;
+    public void setOrderItem(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
 

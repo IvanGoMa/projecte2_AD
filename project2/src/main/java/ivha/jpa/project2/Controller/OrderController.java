@@ -26,6 +26,7 @@ public class OrderController {
         this.service = service;
     }
 
+    // Crea una order
     @PostMapping("/orders")
     public ResponseEntity<?> createOrder(@RequestBody OrderRequestDTO orderRequest) {
         try {
@@ -37,6 +38,7 @@ public class OrderController {
         
     }
 
+    // Canvia l'estat d'una order a processat
     @PatchMapping("/orders/{id}")
     public ResponseEntity<?> processOrder(@PathVariable int id){
         try {

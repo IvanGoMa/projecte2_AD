@@ -118,7 +118,7 @@ public class Customer {
 
     //1:1 amb user (customer guarda el fk d'usuari, si s'elimina customer l'usuari existeix)
     @OneToOne
-    @JoinColumn(name = "userId", unique = true)
+    @JoinColumn(name = "user_id", unique = true)
     private User user;
 
     

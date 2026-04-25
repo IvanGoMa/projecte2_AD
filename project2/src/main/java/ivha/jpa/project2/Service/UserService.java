@@ -14,6 +14,7 @@ import ivha.jpa.project2.Model.Role;
 import ivha.jpa.project2.Model.User;
 import ivha.jpa.project2.Repository.RoleRepository;
 import ivha.jpa.project2.Repository.UserRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
@@ -28,18 +29,21 @@ public class UserService {
         this.roleRepo = roleRepo;
     }
 
-
+    // Crea un usuari + el customer vinculat
+    @Transactional
     public UserResponseDTO createUser(UserRequestDTO userRequest){
-
+        // Crea les entitats user i customer
         User user = userMapper.toUser(userRequest);
         Customer customer = userMapper.toCustomer(userRequest);
+        // Afegeix el customer al user amb el setter especial i guarda a la BD
         user.setCustomer(customer);
         repo.save(user);
         return userMapper.toUserResponseDTO(user);
         
     }
 
-
+    // Retorna el user i el customer de l'user amb l'id passat per path
+    @Transactional
     public UserResponseDTO getUser(Long id) {
         try{
                 User u = repo.findByIdAndStatusTrue(id);
@@ -53,14 +57,18 @@ public class UserService {
             }
     }
 
-
+    // Esborra els rols passats al user indicat
+    @Transactional
     public UserRolesResponseDTO deleteRoles(int id, List<Integer> roleIds) {
 
+        // Busquem el user
         Optional<User> optUser = repo.findById(id);
+        // Busquem els rols a esborrar
         List<Role> roles = roleRepo.findAllById(roleIds);
 
         if (!optUser.isPresent()) return null;
 
+        // Esborrem els rols al user i guardem a la base de dades. S'esborren per cascade.
         User user = optUser.get();
         user.getRols().removeAll(roles);
         User user2 = repo.save(user);

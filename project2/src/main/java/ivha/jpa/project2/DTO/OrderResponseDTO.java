@@ -6,6 +6,8 @@ import java.util.List;
 import ivha.jpa.project2.Model.OrderStatus;
 
 public class OrderResponseDTO {
+
+    private int id;
     private int customer_id;
     private Timestamp orderDate;
     private float totalAmount;
@@ -14,11 +16,12 @@ public class OrderResponseDTO {
 
     
 
-    public OrderResponseDTO(int customer_id, Timestamp orderDate, float totalAmount, OrderStatus orderStatus) {
+    public OrderResponseDTO(int id, int customer_id, Timestamp orderDate, float totalAmount, OrderStatus orderStatus) {
         this.customer_id = customer_id;
         this.orderDate = orderDate;
         this.totalAmount = totalAmount;
         this.orderStatus = orderStatus;
+        this.id = id;
     }
     public int getCustomer_id() {
         return customer_id;
@@ -49,6 +52,12 @@ public class OrderResponseDTO {
     }
     public void setOrderItems(List<OrderItemResponseDTO> orderItems) {
         this.orderItems = orderItems;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
     
     

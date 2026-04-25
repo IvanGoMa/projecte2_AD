@@ -24,7 +24,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @ManyToOne
+    @ManyToOne(fetch =  FetchType.EAGER)
     @JoinColumn(name = "customerId")
     private Customer customer;
     private Timestamp orderDate;
@@ -53,6 +53,7 @@ public class Order {
         this.dataUpdated = dataUpdated;
     }
 
+    public Order(){}
     
     public int getId() {
         return id;
@@ -109,6 +110,7 @@ public class Order {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+        // Afegim order a invoice, ja que invoice es el costat propietari de la fk
         if (invoice != null){
             invoice.setOrder(this);
         }
@@ -124,6 +126,7 @@ public class Order {
         this.orderItems = orderItems;
         if (orderItems != null){
             for (OrderItem orderItem: orderItems){
+                // Afegim order a orderItem, ja que orderItem es el costat propietari de la fk
                 orderItem.setOrder(this);
             }
         }

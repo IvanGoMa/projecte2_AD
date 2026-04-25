@@ -28,17 +28,18 @@ public class UserController {
         this.service = service;
     }
 
-    
+    // Crea un usuari
     @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody UserRequestDTO user){
         try{
-            service.createUser(user);
-            return ResponseEntity.ok(user);
+            UserResponseDTO response = service.createUser(user);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()));
         }
     }
 
+    // Retorna un usuari amb l'id passada per path
     @GetMapping("/users/{id}")
     public ResponseEntity<?> getUser(@PathVariable Long id){
         try{
@@ -53,6 +54,7 @@ public class UserController {
         }
     }
 
+    // Elimina els rols que es passen pel body a l'usuari amb l'id que es passa per path
     @PatchMapping("/users/{id}")
     public ResponseEntity<?> deleteRoles(@PathVariable int id, @RequestBody List<Integer> roles){
         try{

@@ -14,6 +14,7 @@ public class OrderItemResponseDTO {
         this.product = product;
     }
 
+    // OrderItem sense product per evitar recursivitat
     public OrderItemResponseDTO(int quantity, float unitPrice) {
         this.quantity = quantity;
         this.unitPrice = unitPrice;

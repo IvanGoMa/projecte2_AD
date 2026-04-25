@@ -25,7 +25,7 @@ public class CustomerResponseDTO {
     }
 
     
-
+    // Customer sense user per evitar recursivitat
     public CustomerResponseDTO(int id, String firstName, String lastName, String phone, List<Address> addresses) {
         this.id = id;
         this.firstName = firstName;

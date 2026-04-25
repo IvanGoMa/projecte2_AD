@@ -11,6 +11,7 @@ import ivha.jpa.project2.Mapper.CustomerMapper;
 import ivha.jpa.project2.Model.Customer;
 import ivha.jpa.project2.Repository.AddressRepository;
 import ivha.jpa.project2.Repository.CustomerRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class CustomerService {
@@ -25,6 +26,8 @@ public class CustomerService {
         this.mapper = mapper;
     }
 
+    // Elimina les adreces de l'usuari si existeix
+    @Transactional
     public boolean deleteAdresses(int id) {
 
         Optional<Customer> customer = customerRepo.findById(id);
@@ -36,11 +39,14 @@ public class CustomerService {
         }
     }
 
+    // Retorna tots els customers
+    @Transactional
     public List<CustomerResponseDTO> getCustomers() {
         
         List<Customer> customers = customerRepo.findAll();
         List<CustomerResponseDTO> response = new ArrayList<>();
 
+        // Transformem totes les entities de Customer al seu DTO
         for (Customer c: customers){
             response.add(mapper.toCustomerResponseDTO(c));
         }

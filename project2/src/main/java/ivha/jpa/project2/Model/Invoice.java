@@ -35,6 +35,9 @@ public class Invoice {
         this.taxAmount = taxAmount;
         this.totalWithTax = totalWithTax;
     }
+
+    public Invoice(){}
+    
     public int getId() {
         return id;
     }
