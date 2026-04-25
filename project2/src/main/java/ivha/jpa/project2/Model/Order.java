@@ -119,4 +119,16 @@ public class Order {
         return orderItems;
     }
 
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+        if (orderItems != null){
+            for (OrderItem orderItem: orderItems){
+                orderItem.setOrder(this);
+            }
+        }
+    }
+
+    
+
 }

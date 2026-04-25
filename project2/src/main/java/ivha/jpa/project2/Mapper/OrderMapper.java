@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import ivha.jpa.project2.DTO.OrderItemResponseDTO;
 import ivha.jpa.project2.DTO.OrderRequestDTO;
 import ivha.jpa.project2.DTO.OrderResponseDTO;
+import ivha.jpa.project2.DTO.productResponseDTO;
 import ivha.jpa.project2.Model.Order;
 import ivha.jpa.project2.Model.OrderItem;
 import ivha.jpa.project2.Model.OrderStatus;
@@ -18,7 +19,7 @@ public class OrderMapper {
 
     public Order toOrder(OrderRequestDTO orderRequestDTO){
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        return new Order(orderRequestDTO.getOrderDate(), orderRequestDTO.getTotalAmount(), OrderStatus.PENDENT, true, now, now);
+        return new Order(orderRequestDTO.getOrderDate(), 0, OrderStatus.PENDENT, true, now, now);
     }
 
     public OrderResponseDTO toOrderResponseDTO (Order order){
@@ -27,7 +28,20 @@ public class OrderMapper {
             List<OrderItem> orderItems = order.getOrderItems();
             List<OrderItemResponseDTO> orderItemsResponse = new ArrayList<>();
             for (OrderItem o : orderItems){
-                orderItemsResponse.add(new OrderItemResponseDTO(o.getQuantity(), o.getUnitPrice(), o.getProduct()));
+                OrderItemResponseDTO orderItemResponse = new OrderItemResponseDTO(o.getQuantity(), o.getUnitPrice());
+                if (o.getProduct() != null){
+
+                    productResponseDTO product = new productResponseDTO(
+                        o.getProduct().getNom(),
+                        o.getProduct().getDescripcio(),
+                        o.getProduct().getStock(),
+                        o.getProduct().getPrice(),
+                        o.getProduct().getRating(),
+                        o.getProduct().getCondition()
+                    );
+                    orderItemResponse.setProduct(product);
+                }
+                orderItemsResponse.add(orderItemResponse);
             }
             response.setOrderItems(orderItemsResponse);
         }

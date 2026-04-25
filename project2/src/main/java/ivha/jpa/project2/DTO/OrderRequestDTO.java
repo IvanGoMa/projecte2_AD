@@ -7,26 +7,22 @@ import java.util.List;
 public class OrderRequestDTO {
     private int customer_id;
     private Timestamp orderDate;
-    private float totalAmount;
     private List<OrderItemRequestDTO> orderItems;
     private String invoiceNumber;
     private Timestamp issueDate;
     private float taxAmount;
-    private float totalWithTax;
 
     
 
-    public OrderRequestDTO(int customer_id, Timestamp orderDate, float totalAmount,
-            List<OrderItemRequestDTO> orderItems, String invoiceNumber, Timestamp issueDate, float taxAmount,
-            float totalWithTax) {
+    public OrderRequestDTO( int customer_id, Timestamp orderDate, List<OrderItemRequestDTO> orderItems, 
+        String invoiceNumber, Timestamp issueDate, float taxAmount) {
+
         this.customer_id = customer_id;
         this.orderDate = orderDate;
-        this.totalAmount = totalAmount;
         this.orderItems = orderItems;
         this.invoiceNumber = invoiceNumber;
         this.issueDate = issueDate;
         this.taxAmount = taxAmount;
-        this.totalWithTax = totalWithTax;
     }
     public int getCustomer_id() {
         return customer_id;
@@ -40,12 +36,7 @@ public class OrderRequestDTO {
     public void setOrderDate(Timestamp orderDate) {
         this.orderDate = orderDate;
     }
-    public float getTotalAmount() {
-        return totalAmount;
-    }
-    public void setTotalAmount(float totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+    
     public List<OrderItemRequestDTO> getOrderItems() {
         return orderItems;
     }
@@ -70,14 +61,5 @@ public class OrderRequestDTO {
     public void setTaxAmount(float taxAmount) {
         this.taxAmount = taxAmount;
     }
-    public float getTotalWithTax() {
-        return totalWithTax;
-    }
-    public void setTotalWithTax(float totalWithTax) {
-        this.totalWithTax = totalWithTax;
-    }
-
     
-
-
 }

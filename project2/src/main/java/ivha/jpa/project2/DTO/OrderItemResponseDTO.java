@@ -1,20 +1,24 @@
 package ivha.jpa.project2.DTO;
 
-import ivha.jpa.project2.Model.Product;
-
 public class OrderItemResponseDTO {
 
     private int quantity;
     private float unitPrice;
-    private Product product;
+    private productResponseDTO product;
 
     
 
-    public OrderItemResponseDTO(int quantity, float unitPrice, Product product) {
+    public OrderItemResponseDTO(int quantity, float unitPrice, productResponseDTO product) {
         this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.product = product;
     }
+
+    public OrderItemResponseDTO(int quantity, float unitPrice) {
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -27,10 +31,10 @@ public class OrderItemResponseDTO {
     public void setUnitPrice(float unitPrice) {
         this.unitPrice = unitPrice;
     }
-    public Product getProduct() {
+    public productResponseDTO getProduct() {
         return product;
     }
-    public void setProduct(Product product) {
+    public void setProduct(productResponseDTO product) {
         this.product = product;
     }
 
