@@ -21,3 +21,4 @@ Integrant 1: Ivan
 Integrant 2: Hanna
 
 Enllaç al video 2: [https://youtu.be/BSA0W7eegik](https://youtu.be/yLVxSFhHCUc)
+Enllaç al extra on ja funcionen els roles: [https://youtu.be/c_1SY8IaFag] (https://youtu.be/c_1SY8IaFag)
