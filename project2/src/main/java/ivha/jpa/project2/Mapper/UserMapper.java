@@ -6,11 +6,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import ivha.jpa.project2.DTO.AddressResponseDTO;
 import ivha.jpa.project2.DTO.CustomerResponseDTO;
 import ivha.jpa.project2.DTO.RoleResponseDTO;
 import ivha.jpa.project2.DTO.UserRequestDTO;
 import ivha.jpa.project2.DTO.UserResponseDTO;
 import ivha.jpa.project2.DTO.UserRolesResponseDTO;
+import ivha.jpa.project2.Model.Address;
 import ivha.jpa.project2.Model.Customer;
 import ivha.jpa.project2.Model.Role;
 import ivha.jpa.project2.Model.User;
@@ -40,10 +42,15 @@ public class UserMapper {
                 user.getCustomer().getId(),
                 user.getCustomer().getFirstName(),
                 user.getCustomer().getLastName(),
-                user.getCustomer().getPhone(),
-                user.getCustomer().getAdresses()
+                user.getCustomer().getPhone()
             );
+            List<AddressResponseDTO> adresses = new ArrayList<>();
+            for (Address a: user.getCustomer().getAdresses()){
+                adresses.add(new AddressResponseDTO(a.getAddress(), a.getCity(), a.getPostalCode(), a.getCountry(), a.isDefault()));
+            }
+            customer.setAddresses(adresses);
             userResponse.setCustomer(customer);
+
         }
         return userResponse;
     }

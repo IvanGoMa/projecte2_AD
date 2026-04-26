@@ -20,8 +20,6 @@ public class OrderItemRequestDTO {
         this.unitPrice = unitPrice;
         this.productId = productId;
     }
-
-    public OrderItemRequestDTO(){}
     
     public int getQuantity() {
         return quantity;
