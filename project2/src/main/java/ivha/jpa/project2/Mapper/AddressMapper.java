@@ -12,7 +12,7 @@ public class AddressMapper {
     public Address toAddress(AddressRequestDTO request){
         Address address = new Address(
             request.getAddress(), request.getCity(), request.getPostalCode(), 
-            request.getCountry(), request.getDefault()
+            request.getCountry(), request.isDefault()
         );
         return address;
     }
@@ -20,7 +20,7 @@ public class AddressMapper {
     public AddressResponseDTO toResponseDTO(Address a){
         AddressResponseDTO response = new AddressResponseDTO(
             a.getAddress(), a.getCity(), a.getPostalCode(), 
-            a.getCountry(), a.getDefault()
+            a.getCountry(), a.isDefault()
         );
         return response;
     }

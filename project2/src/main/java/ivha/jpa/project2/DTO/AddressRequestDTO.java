@@ -50,7 +50,7 @@ public class AddressRequestDTO {
         this.country = country;
     }
 
-    public boolean getIsDefault() {
+    public boolean isDefault() {
         return isDefault;
     }
 
