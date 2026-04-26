@@ -68,7 +68,7 @@ public class UserRequestDTO {
         this.phone = phone;
     }
 
-    public Boolean getStatus() {
+    public Boolean isStatus() {
         return status;
     }
 

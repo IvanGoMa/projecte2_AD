@@ -6,6 +6,9 @@ public class AddressRequestDTO {
     private String postalCode; 
     private String country;
     private boolean isDefault;
+
+    public AddressRequestDTO() {
+    }
     
     public AddressRequestDTO(String address, String city, String postalCode, String country, boolean isDefault) {
         this.address = address;
@@ -47,11 +50,11 @@ public class AddressRequestDTO {
         this.country = country;
     }
 
-    public boolean getDefault() {
+    public boolean getIsDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean isDefault) {
+    public void setIsDefault(boolean isDefault) {
         this.isDefault = isDefault;
     }
 

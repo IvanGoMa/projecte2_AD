@@ -90,7 +90,7 @@ public class UserService {
         // verifiquem les dades modificades de l'usuari
         if (userRequest.getEmail() != null){ user.setEmail(userRequest.getEmail());}
         if (userRequest.getPassword() != null){user.setPassword(userRequest.getPassword());}
-        if (userRequest.getStatus() != null){user.setStatus(userRequest.getStatus());}
+        if (userRequest.isStatus() != null){user.setStatus(userRequest.isStatus());}
 
         //Verifiquem si hi han dades modificades del customer relacionat al usuari
         Customer customer = user.getCustomer();
