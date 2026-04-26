@@ -1,9 +1,12 @@
 package ivha.jpa.project2.Mapper;
 
+import org.springframework.stereotype.Component;
+
 import ivha.jpa.project2.DTO.AddressRequestDTO;
 import ivha.jpa.project2.DTO.AddressResponseDTO;
 import ivha.jpa.project2.Model.Address;
 
+@Component
 public class AddressMapper {
 
     public Address toAddress(AddressRequestDTO request){

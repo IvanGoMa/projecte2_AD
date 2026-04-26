@@ -29,7 +29,7 @@ public class OrderController {
         this.service = service;
     }
 
-    // Crea una order
+    // 4a Crea una order
     @PostMapping("/orders")
     public ResponseEntity<?> createOrder(@RequestBody OrderRequestDTO orderRequest) {
         try {
@@ -41,7 +41,7 @@ public class OrderController {
         
     }
 
-    // Canvia l'estat d'una order a processat
+    // 4b Canvia l'estat d'una order a processat
     @PatchMapping("/orders/{id}")
     public ResponseEntity<?> processOrder(@PathVariable int id){
         try {
@@ -55,7 +55,7 @@ public class OrderController {
         }
     }
 
-    //Afegir productes a un order x id de producte i per id de l'item, en cas de no trobar item cancel·la tot
+    // 4c Afegir productes a un order x id de producte i per id de l'item, en cas de no trobar item cancel·la tot
     @PatchMapping("/order/{id}/items")
     public ResponseEntity<?> addItemToOrder(@PathVariable int id, @RequestBody List<Integer> itemsId){
         try{
@@ -69,7 +69,7 @@ public class OrderController {
         }
     }
 
-    //Cancelar un order c id
+    // 4d Cancel·lar un order per id
     @PatchMapping("/order/{id}/cancel")
     public ResponseEntity<?> cancelOrder(@PathVariable int id){
         try{
