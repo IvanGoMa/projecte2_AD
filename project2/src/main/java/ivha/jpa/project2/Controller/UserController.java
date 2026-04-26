@@ -30,7 +30,7 @@ public class UserController {
         this.service = service;
     }
 
-    // Crea un usuari
+    //2a Crea un usuari 
     @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody UserRequestDTO user){
         try{
@@ -41,7 +41,7 @@ public class UserController {
         }
     }
 
-    // Retorna un usuari amb l'id passada per path
+    //2b Retorna un usuari amb l'id passada per path
     @GetMapping("/users/{id}")
     public ResponseEntity<?> getUser(@PathVariable Long id){
         try{
@@ -56,7 +56,7 @@ public class UserController {
         }
     }
 
-    // Elimina els rols que es passen pel body a l'usuari amb l'id que es passa per path
+    // 5b Elimina els rols que es passen pel body a l'usuari amb l'id que es passa per path
     @PatchMapping("/users/{id}/roles/delete")
     public ResponseEntity<?> deleteRoles(@PathVariable int id, @RequestBody List<Integer> roles){
         try{
@@ -70,7 +70,7 @@ public class UserController {
         }
     }
 
-    //Modifica la informació de l'usuari/customer amb l'id 
+    // 2c Modifica la informació de l'usuari/customer amb l'id passada per path
     @PatchMapping("/users/{id}")
     public ResponseEntity<?> updateUser(@PathVariable int id, @RequestBody UserRequestDTO user){
         try{
@@ -84,7 +84,7 @@ public class UserController {
         }
     }
 
-    //Retorna l'id, email de tots usuaris i la info dels customers relacionats
+    //2d Retorna l'id, email de tots usuaris i la info dels customers relacionats
     @GetMapping("/users")
     public ResponseEntity<?> getUsuaris(){
         try{
@@ -98,7 +98,7 @@ public class UserController {
         }
     }
 
-    //Afegir rols a un usuari per id d'usuari i ids de rol
+    // 5a Afegir rols a un usuari per id d'usuari i ids de rol
     @PatchMapping("/users/{id}/roles/add")
     public ResponseEntity<?> addRoles(@PathVariable int id, @RequestBody List<Integer> roles){
         try{

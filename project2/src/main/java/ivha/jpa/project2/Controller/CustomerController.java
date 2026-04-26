@@ -28,7 +28,7 @@ public class CustomerController {
         this.service = service;
     }
 
-    // Esborrar totes les adreces d'un customer
+    // 3c Esborrar totes les adreces d'un customer
     @DeleteMapping("/addresses/{id}")
     public ResponseEntity<?> deleteAdresses(int id){
         try {
@@ -42,11 +42,22 @@ public class CustomerController {
         }
     }
 
-    // Retorna tots els customers
-    @GetMapping("/customers/{id}")
-    public ResponseEntity<?> getCustomerById(@PathVariable int id){
+    // 3d Retorna tots els customers
+   @GetMapping("/customers")
+    public ResponseEntity<?> getCustomers(){
         try{
-            CustomerResponseDTO response = service.getCustomerById(id);
+            List<CustomerResponseDTO> customers = service.getCustomers();
+            return ResponseEntity.ok(customers);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()));
+        }
+    }
+
+    //3a Retorna el customer amb les adresses modificades
+    @PatchMapping("/customers/{id}/addresses")
+    public ResponseEntity<?> addAddresses(@PathVariable int id, @RequestBody List<AddressRequestDTO> addresses){
+        try{
+            CustomerResponseDTO response = service.addAddress(id, addresses);
             if (response == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ErrorDTO(HttpStatus.NOT_FOUND.value(), "No s'ha trobat cap customer amb id: " + id));
@@ -58,11 +69,11 @@ public class CustomerController {
         }
     }
 
-    //Retorna el customer amb les adresses modificades
-    @PatchMapping("/customers/{id}/addresses")
-    public ResponseEntity<?> addAddresses(@PathVariable int id, @RequestBody List<AddressRequestDTO> addresses){
+    //3b Consulta UN customer per id, i retorna  l’email de l’usuari, el nom, cognom, telèfon i les direccions de tots els customers.
+    @GetMapping("/customers/{id}")
+    public ResponseEntity<?> getCustomer(@PathVariable int id){
         try{
-            CustomerResponseDTO response = service.addAddress(id, addresses);
+            CustomerResponseDTO response = service.getCustomerById(id);
             if (response == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ErrorDTO(HttpStatus.NOT_FOUND.value(), "No s'ha trobat cap customer amb id: " + id));
