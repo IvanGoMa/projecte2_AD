@@ -36,6 +36,11 @@ public class OrderItem {
         this.unitPrice = unitPrice;
     }
 
+    public OrderItem(int quantity, float unitPrice){
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+    }
+
     public OrderItem(){}
 
     public int getId() {

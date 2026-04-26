@@ -12,6 +12,14 @@ public class OrderItemRequestDTO {
         this.productId = productId;
         this.orderId = orderId;
     }
+
+    public OrderItemRequestDTO(int quantity, float unitPrice, int productId){
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.productId = productId;
+    }
+
+    public OrderItemRequestDTO(){}
     
     public int getQuantity() {
         return quantity;

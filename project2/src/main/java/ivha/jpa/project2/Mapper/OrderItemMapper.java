@@ -18,5 +18,9 @@ public class OrderItemMapper {
         return new OrderItem(order, product, orderItemRequestDTO.getQuantity(), orderItemRequestDTO.getUnitPrice());
     }
 
+    public OrderItem toOrderItem(OrderItemRequestDTO request){
+        return new OrderItem(request.getQuantity(), request.getUnitPrice());
+    }
+
 
 }

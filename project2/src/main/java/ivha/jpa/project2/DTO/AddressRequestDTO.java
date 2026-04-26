@@ -15,6 +15,8 @@ public class AddressRequestDTO {
         this.isDefault = isDefault;
     }
 
+    public AddressRequestDTO(){}
+
     public String getAddress() {
         return address;
     }
