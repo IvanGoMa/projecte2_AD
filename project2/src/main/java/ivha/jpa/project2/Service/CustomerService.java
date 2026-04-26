@@ -59,12 +59,34 @@ public class CustomerService {
     //Afegeix dirreccions a un customer 
     @Transactional
     public CustomerResponseDTO addAddress(int id, List<Address> adresses){
+        
         Optional<Customer> optCust = customerRepo.findById(id);
         if (!optCust.isPresent()){return null;}
+
         Customer customer = optCust.get();
-        customer.setAdresses(adresses);
-        customerRepo.save();
-        return 
+
+        //Assignar fk de costumer a cada adressa
+        for (Address address : adresses) {
+            address.setCustomer(customer);        
+        }            
+        customer.getAdresses().addAll(adresses); // afegeix sense elimina les que ya existeixen
+
+        customerRepo.save(customer);
+        
+        return mapper.toCustomerResponseDTO(customer);
+    }
+
+    //Consultar un customer x id i retornar l'email de l'usuari associat i les addresses
+    @Transactional
+    public CustomerResponseDTO getCustomerById(int id){
+        
+        Optional<Customer> optCust = customerRepo.findById(id);
+        if(!optCust.isPresent()){return null;}
+
+        Customer cust = optCust.get();
+        
+        CustomerResponseDTO response = mapper.toCustomerUserEmailResponseDTO(cust);
+        return response;
     }
 
 }

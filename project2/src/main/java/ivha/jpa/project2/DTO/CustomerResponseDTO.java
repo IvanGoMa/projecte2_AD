@@ -12,6 +12,7 @@ public class CustomerResponseDTO {
     private String phone;
     private UserResponseDTO user;
     private List<Address> addresses;
+    private String userEmail;
 
     
 
@@ -33,6 +34,19 @@ public class CustomerResponseDTO {
         this.phone = phone;
         this.addresses = addresses;
     }
+
+    // Constructor con el email del user
+    public CustomerResponseDTO(int id, String firstName, String lastName, String phone, List<Address> addresses, String userEmail) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.addresses = addresses;
+        this.userEmail = userEmail;
+    }
+
+    public String getUserEmail() { return userEmail; }
+    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
 
 
 

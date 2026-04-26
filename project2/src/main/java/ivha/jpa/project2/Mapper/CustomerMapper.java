@@ -18,4 +18,15 @@ public class CustomerMapper {
         }
         return customer;
     }
+
+    public CustomerResponseDTO toCustomerUserEmailResponseDTO(Customer c){
+        CustomerResponseDTO customer = new CustomerResponseDTO(
+            c.getId(), c.getFirstName(), c.getLastName(), c.getPhone(), c.getAdresses()
+        );
+        if (c.getUser() != null){
+            customer.setUserEmail(c.getUser().getEmail());
+        }
+        return customer;
+    }
+    
 }
