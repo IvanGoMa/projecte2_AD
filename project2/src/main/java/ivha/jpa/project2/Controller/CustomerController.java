@@ -30,7 +30,7 @@ public class CustomerController {
 
     // 3c Esborrar totes les adreces d'un customer
     @DeleteMapping("/addresses/{id}")
-    public ResponseEntity<?> deleteAdresses(int id){
+    public ResponseEntity<?> deleteAdresses(@PathVariable int id){
         try {
             if(service.deleteAdresses(id)){
                 return ResponseEntity.ok("S'han esborrat les adresses del customer amb id " + id);

@@ -9,9 +9,6 @@ public class UserRequestDTO {
     private String phone;
     private Boolean status;
 
-    public UserRequestDTO() {
-    }
-
     public UserRequestDTO(String email, String password, String firstName, String lastName, String phone) {
         this.email = email;
         this.password = password;
@@ -29,6 +26,7 @@ public class UserRequestDTO {
         this.phone = phone;
     }
 
+    public UserRequestDTO(){}
     
 
     public String getEmail() {

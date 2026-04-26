@@ -2,7 +2,6 @@ package ivha.jpa.project2.DTO;
 
 import java.util.List;
 
-import ivha.jpa.project2.Model.Address;
 
 public class CustomerResponseDTO {
     
@@ -22,6 +21,13 @@ public class CustomerResponseDTO {
         this.lastName = lastName;
         this.phone = phone;
         this.addresses = addresses;
+    }
+
+    public CustomerResponseDTO(int id, String firstName, String lastName, String phone) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
     }
 
     // Constructor con el email del user

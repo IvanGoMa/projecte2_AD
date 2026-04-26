@@ -1,7 +1,6 @@
 package ivha.jpa.project2.Service;
 
 import ivha.jpa.project2.Controller.ProductController;
-import ivha.jpa.project2.Service.ProductService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import ivha.jpa.project2.DTO.OrderItemRequestDTO;
 import ivha.jpa.project2.DTO.OrderRequestDTO;
 import ivha.jpa.project2.DTO.OrderResponseDTO;
-import ivha.jpa.project2.DTO.productRequestDTO;
 import ivha.jpa.project2.Mapper.OrderItemMapper;
 import ivha.jpa.project2.Mapper.OrderMapper;
 import ivha.jpa.project2.Model.Customer;
