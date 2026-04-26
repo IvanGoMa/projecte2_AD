@@ -22,4 +22,5 @@ Integrant 1: Ivan (Entities: Order, Invoice, Order_Item y modificat producte)
 Integrant 2: Hanna (Entities: Role, User, Customer y Address)
 
 Enllaç al video 2: [https://youtu.be/BSA0W7eegik](https://youtu.be/yLVxSFhHCUc)
-Enllaç al extra on ja funcionen els roles: [https://youtu.be/c_1SY8IaFag] (https://youtu.be/c_1SY8IaFag)
+
+Enllaç al extra on ja funcionen els roles: [https://youtu.be/c_1SY8IaFag](https://youtu.be/c_1SY8IaFag)
