@@ -26,6 +26,7 @@ public class UserRequestDTO {
         this.phone = phone;
     }
 
+    public UserRequestDTO(){}
     
 
     public String getEmail() {
