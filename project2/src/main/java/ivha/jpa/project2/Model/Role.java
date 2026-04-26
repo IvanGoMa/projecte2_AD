@@ -16,12 +16,12 @@ public class Role {
     @Id
     @GeneratedValue
     private int id;
-    private String name; // enum o check??
+    private Name name;
     private String description;
 
     public Role() {
     }
-    public Role(String name, String description) {
+    public Role(Name name, String description) {
         this.name = name;
         this.description = description;
     }
@@ -32,10 +32,10 @@ public class Role {
     public void setId(int id) {
         this.id = id;
     }
-    public String getName() {
+    public Name getName() {
         return name;
     }
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
     public String getDescription() {

@@ -85,7 +85,7 @@ public class Order {
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
     public void setStatus(boolean status) {

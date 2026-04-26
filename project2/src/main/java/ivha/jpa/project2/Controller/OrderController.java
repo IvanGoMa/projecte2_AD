@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 import ivha.jpa.project2.DTO.ErrorDTO;
 import ivha.jpa.project2.DTO.OrderRequestDTO;
 import ivha.jpa.project2.DTO.OrderResponseDTO;
+import ivha.jpa.project2.DTO.productRequestDTO;
 import ivha.jpa.project2.Service.OrderService;
+
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +53,21 @@ public class OrderController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()));
         }
+    }
+
+    //Afegir productes a un order x id
+    @PatchMapping("/order/{id}/items")
+    public ResponseEntity<?> addItemToOrder(@PathVariable int id, @RequestBody List<productRequestDTO> items){
+        try{
+            OrderResponseDTO response = service.addItem(id, items);
+            if (response == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDTO(HttpStatus.NOT_FOUND.value(),"No s'ha trobat l'order"));
+            }
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()));
+        }
+
     }
     
 

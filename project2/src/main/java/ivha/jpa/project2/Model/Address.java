@@ -32,6 +32,11 @@ public class Address {
         this.isDefault = isDefault;
     }
 
+    // N:1 amb Customer (la adressa guarda el id del customer)
+    @ManyToOne // propietari, guardara la fk.
+    @JoinColumn(name = "customerId") // es crea la columna
+    private Customer customer;
+
     public int getId() {
         return id;
     }
@@ -69,10 +74,12 @@ public class Address {
         this.isDefault = isDefault;
     }
 
+    public Customer getCustomer(){
+        return customer;
+    }
+    public void setCustomer(Customer customer){
+        this.customer = customer;
+    }
 
-    // N:1 amb Customer (la adressa guarda el id del customer)
-    @ManyToOne // propietari, guardara la fk.
-    @JoinColumn(name = "customerId") // es crea la columna
-    private Customer customer;
     
 }

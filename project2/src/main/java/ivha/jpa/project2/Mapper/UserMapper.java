@@ -2,6 +2,7 @@ package ivha.jpa.project2.Mapper;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -21,12 +22,12 @@ public class UserMapper {
     public User toUser(UserRequestDTO userRequest){
 
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        return new User(userRequest.getEmail(), userRequest.getPassword(), true, now, now);
+        return new User(userRequest.getEmail(), userRequest.getPassword(), userRequest.getStatus(), now, now);
     }
 
     public Customer toCustomer (UserRequestDTO userRequest){
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        return new Customer(userRequest.getFirstName(), userRequest.getLastName(), userRequest.getPhone(), true, now, now);
+        return new Customer(userRequest.getFirstName(), userRequest.getLastName(), userRequest.getPhone(), userRequest.getStatus(), now, now);
     }
 
     public UserResponseDTO toUserResponseDTO(User user){
@@ -46,6 +47,14 @@ public class UserMapper {
             userResponse.setCustomer(customer);
         }
         return userResponse;
+    }
+
+    public List<UserResponseDTO> toUsersAndCustomersResponseDTO(List<User> users){
+        List<UserResponseDTO> usersResponse = new ArrayList<>(users.size());
+        for (User user : users) {
+            usersResponse.add(toUserAndCustomerResponseDTO(user));
+        }
+        return usersResponse;
     }
 
     public UserRolesResponseDTO toUserRolesResponseDTO(User user){

@@ -3,6 +3,7 @@ package ivha.jpa.project2.DTO;
 import ivha.jpa.project2.Model.Condition;
 
 public class productRequestDTO {
+    private int id;
     private String nom;
     private String descripcio;
     private Integer stock;
@@ -21,7 +22,15 @@ public class productRequestDTO {
         this.condition = condition;
         this.active = active;
     }
+
+    public productRequestDTO(int id){
+        this.id = id;
+    }
     
+    public int getId() {
+        return id;
+    }
+
     public String getNom() {
         return nom;
     }
