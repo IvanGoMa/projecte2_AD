@@ -113,6 +113,28 @@ public class UserService {
         return responseDTOs;
     }
 
+    // Afegeix rols a un usuari (x id) i retorna la info de l'usuari i els rols relacionats
+    @Transactional
+    public UserRolesResponseDTO addRoles(int id, List<Integer> roleIds) {
+
+        // Busquem el user
+        Optional<User> optUser = repo.findById(id);
+        if (!optUser.isPresent()) return null;
+        // Busquem els rols a afegir
+        List<Role> roles = roleRepo.findAllById(roleIds);//ignora si li mandem un rol que no existeix, sense donar error
+
+        User user = optUser.get();
+
+        //Comprovem que no s'estigui afegint un rol que ja té l'usuari, si es així retornem error
+        for (Role r: roles){
+            if (!user.getRols().contains(r)){
+                user.getRols().add(r); // nomes afegir si es un rol que l'usuari no tenia previament
+            }
+        }
+
+        User user2 = repo.save(user);
+        return userMapper.toUserRolesResponseDTO(user2);
+    }
 
 
 }

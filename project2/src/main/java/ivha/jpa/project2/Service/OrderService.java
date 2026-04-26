@@ -36,12 +36,14 @@ public class OrderService {
     private final OrderItemMapper orderItemMapper;
     private final CustomerRepository customerRepo;
 
-    public OrderService (OrderRepository repo, ProductRepository productRepo, OrderMapper mapper, OrderItemMapper orderItemMapper, CustomerRepository customerRepository, Controller.ProductController productController, Service.ProductService productService){
+    public OrderService (OrderRepository repo, ProductRepository productRepo, OrderMapper mapper, OrderItemMapper orderItemMapper, CustomerRepository customerRepository, ProductController productController, ProductService productService){
         this.repo = repo;
         this.productRepo = productRepo;
         this.mapper = mapper;
         this.orderItemMapper = orderItemMapper;
         customerRepo = customerRepository;
+        this.productController = productController;
+        this.productService = productService;
     }
 
     // Creació d'una order
@@ -101,17 +103,36 @@ public class OrderService {
 
     //Afegeix items a un order i retorna la informacio de l'order i order_item
     @Transactional
-    public OrderResponseDTO addItem(int id, List<productRequestDTO> items){
+    public OrderResponseDTO addItemById(int id, List<Integer> itemsId){
 
         Optional<Order> optOrder = repo.findById(id);
         if (!optOrder.isPresent()){return null;}
+        Order order = optOrder.get();
 
-        for (productRequestDTO productRequest : items) {
-            Optional<Product> optProd = productRepo.findById((long)productRequest.getId());
+        for (Integer itemId : itemsId) {
+            Optional<Product> optProd = productRepo.findById((long) itemId);
             if (!optProd.isPresent()){return null;} // si un producte no existeix returnem error
-
-            OrderItem item = mapper.to
+            
+            Product product = optProd.get();
+            OrderItem item = new OrderItem(order, product, 1, product.getPrice());//creem un order item amb quantitat 1 i el preu del producte
+            order.getOrderItems().add(item); //afegim el item a l'order
+            order.setTotalAmount(order.getTotalAmount() + product.getPrice()); //actualitzem el total de l'order
         }
+        repo.save(order);
+        return mapper.toOrderResponseDTO(order);
     }
 
+    // Cancela un order, canviant el seu estat a cancelat
+    @Transactional
+    public OrderResponseDTO cancelOrder(int id){
+
+        Optional<Order> optOrder = repo.findById(id);
+        if (!optOrder.isPresent()){return null;}
+        Order order = optOrder.get();
+        if (order.getOrderStatus() == OrderStatus.PENDENT){ // nomes si esta pendent
+            order.setOrderStatus(OrderStatus.CANCELAT);
+        }else return null; // si no esta pendent no es pot cancel·lar
+        repo.save(order);
+        return mapper.toOrderResponseDTO(order);
+    }
 }

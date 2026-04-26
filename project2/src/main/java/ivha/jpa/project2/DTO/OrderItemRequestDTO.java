@@ -4,13 +4,13 @@ public class OrderItemRequestDTO {
     private int quantity;
     private float unitPrice;
     private int productId;
+    private int orderId;
 
-    
-
-    public OrderItemRequestDTO(int quantity, float unitPrice, int productId) {
+    public OrderItemRequestDTO(int quantity, float unitPrice, int productId, int orderId) {
         this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.productId = productId;
+        this.orderId = orderId;
     }
     
     public int getQuantity() {
@@ -32,6 +32,11 @@ public class OrderItemRequestDTO {
         this.productId = productId;
     }
 
-    
+    public int getOrderId() {
+        return orderId;
+    }
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
 
 }

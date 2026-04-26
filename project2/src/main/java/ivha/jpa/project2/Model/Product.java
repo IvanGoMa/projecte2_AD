@@ -13,7 +13,7 @@ import jakarta.persistence.OneToMany;
 public class Product {
     @Id
     @GeneratedValue 
-    private Long id;
+    private int id;
     @Column(nullable=false, length=20)
     private String nom;
     @Column(length=100)
@@ -47,7 +47,7 @@ public class Product {
     }
 
 
-    public Product(Long id, String nom, String descripcio, Integer stock, Float price, Float rating,
+    public Product(int id, String nom, String descripcio, Integer stock, Float price, Float rating,
             Condition condition, boolean active, Timestamp dateCreated, Timestamp dateUpdated) {
         this.id = id;
         this.nom = nom;
@@ -76,12 +76,12 @@ public class Product {
     }
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -57,7 +57,7 @@ public class UserController {
     }
 
     // Elimina els rols que es passen pel body a l'usuari amb l'id que es passa per path
-    @PatchMapping("/users/{id}/roles")
+    @PatchMapping("/users/{id}/roles/delete")
     public ResponseEntity<?> deleteRoles(@PathVariable int id, @RequestBody List<Integer> roles){
         try{
             UserRolesResponseDTO response = service.deleteRoles(id, roles);
@@ -95,6 +95,20 @@ public class UserController {
             return ResponseEntity.ok(response);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
+        }
+    }
+
+    //Afegir rols a un usuari per id d'usuari i ids de rol
+    @PatchMapping("/users/{id}/roles/add")
+    public ResponseEntity<?> addRoles(@PathVariable int id, @RequestBody List<Integer> roles){
+        try{
+            UserRolesResponseDTO response = service.addRoles(id, roles);
+            if (response == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDTO(HttpStatus.NOT_FOUND.value(),"No s'ha trobat cap usuari amb id " + id));
+            }
+            return ResponseEntity.ok(response);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()));
         }
     }
     

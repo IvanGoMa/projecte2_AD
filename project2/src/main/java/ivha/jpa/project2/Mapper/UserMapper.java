@@ -2,7 +2,6 @@ package ivha.jpa.project2.Mapper;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -64,7 +63,7 @@ public class UserMapper {
 
         if (user.getRols()!= null){
             for (Role r: user.getRols()){
-                roles.add(new RoleResponseDTO(r.getName(), r.getDescription()));
+                roles.add(new RoleResponseDTO(r.getName().toString(), r.getDescription()));
             }
         }
         return new UserRolesResponseDTO(userResponse, roles);

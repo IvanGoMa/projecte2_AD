@@ -55,19 +55,32 @@ public class OrderController {
         }
     }
 
-    //Afegir productes a un order x id
+    //Afegir productes a un order x id de producte i per id de l'item, en cas de no trobar item cancel·la tot
     @PatchMapping("/order/{id}/items")
-    public ResponseEntity<?> addItemToOrder(@PathVariable int id, @RequestBody List<productRequestDTO> items){
+    public ResponseEntity<?> addItemToOrder(@PathVariable int id, @RequestBody List<Integer> itemsId){
         try{
-            OrderResponseDTO response = service.addItem(id, items);
+            OrderResponseDTO response = service.addItemById(id, itemsId);
             if (response == null){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDTO(HttpStatus.NOT_FOUND.value(),"No s'ha trobat l'order"));
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDTO(HttpStatus.NOT_FOUND.value(),"No s'ha trobat l'order o un dels items no existeix"));
             }
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()));
         }
+    }
 
+    //Cancelar un order c id
+    @PatchMapping("/order/{id}/cancel")
+    public ResponseEntity<?> cancelOrder(@PathVariable int id){
+        try{
+            OrderResponseDTO response = service.cancelOrder(id);
+            if (response == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDTO(HttpStatus.NOT_FOUND.value(),"No s'ha trobat l'order o el l'estat no es pendent"));
+            }
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()));
+        }
     }
     
 
