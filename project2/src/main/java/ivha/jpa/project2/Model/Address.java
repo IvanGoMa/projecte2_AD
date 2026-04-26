@@ -67,7 +67,7 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
-    public Boolean getDefault() {
+    public Boolean isDefault() {
         return isDefault;
     }
     public void setIsDefault(Boolean isDefault) {

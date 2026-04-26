@@ -12,7 +12,7 @@ public class OrderRequestDTO {
     private Timestamp issueDate;
     private float taxAmount;
 
-    
+    public OrderRequestDTO() {}
 
     public OrderRequestDTO( int customer_id, Timestamp orderDate, List<OrderItemRequestDTO> orderItems, 
         String invoiceNumber, Timestamp issueDate, float taxAmount) {
