@@ -11,23 +11,12 @@ public class CustomerResponseDTO {
     private String lastName;
     private String phone;
     private UserResponseDTO user;
-    private List<Address> addresses;
+    private List<AddressResponseDTO> addresses;
     private String userEmail;
 
     
-
-    public CustomerResponseDTO(int id, String firstName, String lastName, String phone, List<Address> addresses, UserResponseDTO user) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.user = user;
-        this.addresses = addresses;
-    }
-
-    
     // Customer sense user per evitar recursivitat
-    public CustomerResponseDTO(int id, String firstName, String lastName, String phone, List<Address> addresses) {
+    public CustomerResponseDTO(int id, String firstName, String lastName, String phone, List<AddressResponseDTO> addresses) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,7 +25,7 @@ public class CustomerResponseDTO {
     }
 
     // Constructor con el email del user
-    public CustomerResponseDTO(int id, String firstName, String lastName, String phone, List<Address> addresses, String userEmail) {
+    public CustomerResponseDTO(int id, String firstName, String lastName, String phone, List<AddressResponseDTO> addresses, String userEmail) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -98,13 +87,13 @@ public class CustomerResponseDTO {
 
 
 
-    public List<Address> getAddresses() {
+    public List<AddressResponseDTO> getAddresses() {
         return addresses;
     }
 
 
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(List<AddressResponseDTO> addresses) {
         this.addresses = addresses;
     }
     
