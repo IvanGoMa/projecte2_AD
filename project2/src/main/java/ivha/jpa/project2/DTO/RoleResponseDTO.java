@@ -5,7 +5,6 @@ public class RoleResponseDTO {
     private String name;
     private String description;
 
-    
 
     public RoleResponseDTO(String name, String description) {
         this.name = name;

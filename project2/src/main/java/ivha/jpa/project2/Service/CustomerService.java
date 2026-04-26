@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import ivha.jpa.project2.DTO.AddressRequestDTO;
 import ivha.jpa.project2.DTO.CustomerResponseDTO;
+import ivha.jpa.project2.Mapper.AddressMapper;
 import ivha.jpa.project2.Mapper.CustomerMapper;
 import ivha.jpa.project2.Model.Address;
 import ivha.jpa.project2.Model.Customer;
@@ -20,12 +22,14 @@ public class CustomerService {
     private final CustomerRepository customerRepo;
     private final AddressRepository addressRepo;
     private final CustomerMapper mapper;
+    private final AddressMapper addressMapper;
 
     // Injecció de dependències
-    public CustomerService (CustomerRepository customerRepo, AddressRepository addressRepo, CustomerMapper mapper){
+    public CustomerService (CustomerRepository customerRepo, AddressRepository addressRepo, CustomerMapper mapper, AddressMapper addressMapper){
         this.customerRepo = customerRepo;
         this.addressRepo = addressRepo;
         this.mapper = mapper;
+        this.addressMapper = addressMapper;
     }
 
     // Elimina les adreces de l'usuari si existeix
@@ -58,18 +62,21 @@ public class CustomerService {
 
     //Afegeix dirreccions a un customer 
     @Transactional
-    public CustomerResponseDTO addAddress(int id, List<Address> adresses){
+    public CustomerResponseDTO addAddress(int id, List<AddressRequestDTO> adresses){
         
         Optional<Customer> optCust = customerRepo.findById(id);
         if (!optCust.isPresent()){return null;}
 
         Customer customer = optCust.get();
+        List<Address> addressList = new ArrayList<>();
 
         //Assignar fk de costumer a cada adressa
-        for (Address address : adresses) {
-            address.setCustomer(customer);        
+        for (AddressRequestDTO addressRequest : adresses) {
+            Address address = addressMapper.toAddress(addressRequest);
+            address.setCustomer(customer);  
+            addressList.add(address);      
         }            
-        customer.getAdresses().addAll(adresses); // afegeix sense elimina les que ya existeixen
+        customer.getAdresses().addAll(addressList); // afegeix sense elimina les que ya existeixen
 
         customerRepo.save(customer);
         

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import ivha.jpa.project2.DTO.AddressRequestDTO;
 import ivha.jpa.project2.DTO.CustomerResponseDTO;
 import ivha.jpa.project2.DTO.ErrorDTO;
 import ivha.jpa.project2.Model.Address;
@@ -59,7 +60,7 @@ public class CustomerController {
 
     //Retorna el customer amb les adresses modificades
     @PatchMapping("/customers/{id}/addresses")
-    public ResponseEntity<?> addAddresses(@PathVariable int id, @RequestBody List<Address> addresses){
+    public ResponseEntity<?> addAddresses(@PathVariable int id, @RequestBody List<AddressRequestDTO> addresses){
         try{
             CustomerResponseDTO response = service.addAddress(id, addresses);
             if (response == null){

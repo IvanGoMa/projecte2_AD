@@ -47,7 +47,7 @@ public class AddressResponseDTO {
         this.country = country;
     }
 
-    public boolean isDefault() {
+    public boolean getDefault() { 
         return isDefault;
     }
 
