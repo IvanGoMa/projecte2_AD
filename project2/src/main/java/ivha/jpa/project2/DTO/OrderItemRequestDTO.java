@@ -6,6 +6,8 @@ public class OrderItemRequestDTO {
     private int productId;
     private int orderId;
 
+    public OrderItemRequestDTO(){}
+
     public OrderItemRequestDTO(int quantity, float unitPrice, int productId, int orderId) {
         this.quantity = quantity;
         this.unitPrice = unitPrice;
