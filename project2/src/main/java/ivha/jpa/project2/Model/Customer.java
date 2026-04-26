@@ -64,7 +64,7 @@ public class Customer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public boolean getStatus() {
+    public boolean isStatus() {
         return status;
     }
     public void setStatus(boolean status) {
