@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import ivha.jpa.project2.DTO.AddressRequestDTO;
 import ivha.jpa.project2.DTO.CustomerResponseDTO;
 import ivha.jpa.project2.DTO.ErrorDTO;

@@ -21,12 +21,12 @@ public class UserMapper {
     public User toUser(UserRequestDTO userRequest){
 
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        return new User(userRequest.getEmail(), userRequest.getPassword(), userRequest.getStatus(), now, now);
+        return new User(userRequest.getEmail(), userRequest.getPassword(), userRequest.isStatus(), now, now);
     }
 
     public Customer toCustomer (UserRequestDTO userRequest){
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        return new Customer(userRequest.getFirstName(), userRequest.getLastName(), userRequest.getPhone(), userRequest.getStatus(), now, now);
+        return new Customer(userRequest.getFirstName(), userRequest.getLastName(), userRequest.getPhone(), userRequest.isStatus(), now, now);
     }
 
     public UserResponseDTO toUserResponseDTO(User user){

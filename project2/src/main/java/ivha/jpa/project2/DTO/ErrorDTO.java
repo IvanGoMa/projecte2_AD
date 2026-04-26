@@ -9,7 +9,7 @@ public class ErrorDTO {
         this.message = message;
     }
 
-    public int getStatus() {
+    public int isStatus() {
         return status;
     }
 
