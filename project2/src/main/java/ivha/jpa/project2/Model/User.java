@@ -91,7 +91,7 @@ public class User {
     )
     private List<Role> rols = new ArrayList<>();
 
-
+    // 1:1 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Customer customer;
 }
