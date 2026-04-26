@@ -7,6 +7,7 @@ public class UserRequestDTO {
     private String firstName;
     private String lastName;
     private String phone;
+    private Boolean status;
 
     public UserRequestDTO(String email, String password, String firstName, String lastName, String phone) {
         this.email = email;
@@ -15,6 +16,17 @@ public class UserRequestDTO {
         this.lastName = lastName;
         this.phone = phone;
     }
+
+    public UserRequestDTO(String email, String password, String firstName, Boolean status, String lastName, String phone) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.status = status;
+        this.lastName = lastName;
+        this.phone = phone;
+    }
+
+    
 
     public String getEmail() {
         return email;
@@ -54,6 +66,14 @@ public class UserRequestDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     

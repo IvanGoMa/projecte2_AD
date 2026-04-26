@@ -1,5 +1,6 @@
 package ivha.jpa.project2.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +75,42 @@ public class UserService {
         User user2 = repo.save(user);
         return userMapper.toUserRolesResponseDTO(user2);
 
+    }
+
+    //Modifica la informació de l'usuari/customer amb l'id passat per path
+    @Transactional
+    public UserResponseDTO updateUser(int id, UserRequestDTO userRequest) {
+        // Busquem el user
+        Optional<User> optUser = repo.findById(id); // Optional per evitar null pointer exception en cas de que no existeixi el user amb l'id passat per path
+        if (!optUser.isPresent()) return null;
+
+        // Usuari existent
+        User user = optUser.get();
+        
+        // verifiquem les dades modificades de l'usuari
+        if (userRequest.getEmail() != null){ user.setEmail(userRequest.getEmail());}
+        if (userRequest.getPassword() != null){user.setPassword(userRequest.getPassword());}
+        if (userRequest.getStatus() != null){user.setStatus(userRequest.getStatus());}
+
+        //Verifiquem si hi han dades modificades del customer relacionat al usuari
+        Customer customer = user.getCustomer();
+        if(userRequest.getFirstName() != null){customer.setFirstName(userRequest.getFirstName());}
+        if(userRequest.getLastName() != null){customer.setLastName(userRequest.getLastName());}
+        if(userRequest.getPhone() != null){customer.setPhone(userRequest.getPhone());}
+
+        // Guardem a la base de dades
+        User user2 = repo.save(user);
+        return userMapper.toUserAndCustomerResponseDTO(user2);
+    }
+
+    //Retorna tots els usuaris amb el deu id, email i el customer relacionat
+    @Transactional
+    public List<UserResponseDTO> getUsers(){
+        List<User> users = repo.findAll();
+        
+        ArrayList<UserResponseDTO> responseDTOs = new ArrayList<>(userMapper.toUsersAndCustomersResponseDTO(users));
+
+        return responseDTOs;
     }
 
 

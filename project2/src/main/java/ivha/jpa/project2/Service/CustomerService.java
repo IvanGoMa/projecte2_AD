@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ivha.jpa.project2.DTO.CustomerResponseDTO;
 import ivha.jpa.project2.Mapper.CustomerMapper;
+import ivha.jpa.project2.Model.Address;
 import ivha.jpa.project2.Model.Customer;
 import ivha.jpa.project2.Repository.AddressRepository;
 import ivha.jpa.project2.Repository.CustomerRepository;
@@ -20,6 +21,7 @@ public class CustomerService {
     private final AddressRepository addressRepo;
     private final CustomerMapper mapper;
 
+    // Injecció de dependències
     public CustomerService (CustomerRepository customerRepo, AddressRepository addressRepo, CustomerMapper mapper){
         this.customerRepo = customerRepo;
         this.addressRepo = addressRepo;
@@ -52,6 +54,17 @@ public class CustomerService {
         }
 
         return response;
+    }
+
+    //Afegeix dirreccions a un customer 
+    @Transactional
+    public CustomerResponseDTO addAddress(int id, List<Address> adresses){
+        Optional<Customer> optCust = customerRepo.findById(id);
+        if (!optCust.isPresent()){return null;}
+        Customer customer = optCust.get();
+        customer.setAdresses(adresses);
+        customerRepo.save();
+        return 
     }
 
 }

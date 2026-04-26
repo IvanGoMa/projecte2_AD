@@ -17,6 +17,8 @@ import ivha.jpa.project2.DTO.UserRequestDTO;
 import ivha.jpa.project2.DTO.UserResponseDTO;
 import ivha.jpa.project2.DTO.UserRolesResponseDTO;
 import ivha.jpa.project2.Service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api")
@@ -55,7 +57,7 @@ public class UserController {
     }
 
     // Elimina els rols que es passen pel body a l'usuari amb l'id que es passa per path
-    @PatchMapping("/users/{id}")
+    @PatchMapping("/users/{id}/roles")
     public ResponseEntity<?> deleteRoles(@PathVariable int id, @RequestBody List<Integer> roles){
         try{
             UserRolesResponseDTO response = service.deleteRoles(id, roles);
@@ -65,6 +67,34 @@ public class UserController {
             return ResponseEntity.ok(response);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()));
+        }
+    }
+
+    //Modifica la informació de l'usuari/customer amb l'id 
+    @PatchMapping("/users/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable int id, @RequestBody UserRequestDTO user){
+        try{
+            UserResponseDTO response = service.updateUser(id, user);
+            if (response == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDTO(HttpStatus.NOT_FOUND.value(), "No s'ha trobat cap usuari amb id: " + id));
+            }
+            return ResponseEntity.ok(response);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
+        }
+    }
+
+    //Retorna l'id, email de tots usuaris i la info dels customers relacionats
+    @GetMapping("/users")
+    public ResponseEntity<?> getUsuaris(){
+        try{
+            List<UserResponseDTO> response = service.getUsers();
+            if (response == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDTO(HttpStatus.NOT_FOUND.value(), "No s'ha trobat cap usuari"));
+            }
+            return ResponseEntity.ok(response);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
         }
     }
     

@@ -64,7 +64,7 @@ public class Customer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
     public void setStatus(boolean status) {
@@ -100,6 +100,7 @@ public class Customer {
     public void setUser(User user) {
         this.user = user;
     }
+
     public void setAdresses(List<Address> adresses) {
         this.adresses = adresses;
     }
@@ -108,7 +109,7 @@ public class Customer {
 
 
 
-    //1:N amb address (el Customer guarda la llista d'adreses.)
+    //1:N amb address (El Customer guarda la llista d'adreces)
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Address> adresses = new ArrayList<>();
     

@@ -64,7 +64,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
     public void setStatus(boolean status) {
