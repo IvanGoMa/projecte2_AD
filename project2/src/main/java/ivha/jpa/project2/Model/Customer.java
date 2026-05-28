@@ -1,17 +1,16 @@
 package ivha.jpa.project2.Model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.engine.internal.Cascade;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -29,6 +28,7 @@ public class Customer {
     private boolean status;
     private Timestamp dataCreated;
     private Timestamp dataUpdated;
+
     public Customer() {
     }
     public Customer(String firstName, String lastName, String phone, boolean status, Timestamp dataCreated,
@@ -84,9 +84,34 @@ public class Customer {
     }
 
 
-    //1:N amb address (el Customer guarda la llista d'adreses.)
+    public List<Address> getAdresses() {
+        return adresses;
+    }
+    
+    public List<Order> getOrders() {
+        return orders;
+    }
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setAdresses(List<Address> adresses) {
+        this.adresses = adresses;
+    }
+    
+
+
+
+
+    //1:N amb address (El Customer guarda la llista d'adreces)
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Address> adrresses = new ArrayList<>();
+    private List<Address> adresses = new ArrayList<>();
     
     //1:N amb order (El Customer guarda la llista d'ordres)
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
@@ -94,7 +119,9 @@ public class Customer {
 
     //1:1 amb user (customer guarda el fk d'usuari, si s'elimina customer l'usuari existeix)
     @OneToOne
-    @JoinColumn(name = "userId", unique = true)
+    @JoinColumn(name = "user_id", unique = true)
     private User user;
+
+    
 
 }

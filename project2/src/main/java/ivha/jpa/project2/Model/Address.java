@@ -1,12 +1,11 @@
 package ivha.jpa.project2.Model;
 
-import jakarta.annotation.Generated;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,6 +31,11 @@ public class Address {
         this.country = country;
         this.isDefault = isDefault;
     }
+
+    // N:1 amb Customer (la adressa guarda el id del customer)
+    @ManyToOne // propietari, guardara la fk.
+    @JoinColumn(name = "customerId") // es crea la columna
+    private Customer customer;
 
     public int getId() {
         return id;
@@ -63,17 +67,19 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
-    public Boolean getIsDefault() {
+    public Boolean isDefault() {
         return isDefault;
     }
     public void setIsDefault(Boolean isDefault) {
         this.isDefault = isDefault;
     }
 
+    public Customer getCustomer(){
+        return customer;
+    }
+    public void setCustomer(Customer customer){
+        this.customer = customer;
+    }
 
-    // N:1 amb Customer (la adressa guarda el id del customer)
-    @ManyToOne // propietari, guardara la fk.
-    @JoinColumn(name = "customerId") // es crea la columna
-    private Customer customer;
     
 }

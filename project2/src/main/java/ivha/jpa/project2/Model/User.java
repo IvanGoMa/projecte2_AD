@@ -1,15 +1,16 @@
 package ivha.jpa.project2.Model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -17,12 +18,12 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue 
-    private Long id;
+    private int id;
     @Column(nullable=false, length=100)
     private String email;
     @Column(length=20)
@@ -45,10 +46,10 @@ public class User {
     }
 
     // getters i setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getEmail() {
@@ -82,6 +83,29 @@ public class User {
         this.dateUpdated = dateUpdated;
     }
     
+    public List<Role> getRols() {
+        return rols;
+    }
+
+    public void setRols(List<Role> rols) {
+        this.rols = rols;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        // Afegim user a customer, ja que customer es el costat propietari de la fk
+        if (customer != null){
+            customer.setUser(this);
+        }
+        
+    }
+
+
+
     // ManyToMany - rol de usuari, en el costat del propietari
     @ManyToMany
     @JoinTable(
@@ -91,7 +115,7 @@ public class User {
     )
     private List<Role> rols = new ArrayList<>();
 
-
+    // 1:1 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Customer customer;
 }

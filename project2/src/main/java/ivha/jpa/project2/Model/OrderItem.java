@@ -29,10 +29,19 @@ public class OrderItem {
 
 
     
-    public OrderItem(int quantity, float unitPrice) {
+    public OrderItem(Order order, Product product, int quantity, float unitPrice) {
+        this.order = order;
+        this.product = product;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
     }
+
+    public OrderItem(int quantity, float unitPrice){
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+    }
+
+    public OrderItem(){}
 
     public int getId() {
         return id;
